@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_F057B5B8-4D77-47B7-8C4E-08E994A032D7" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:included1="https://kiegroup.org/dmn/_F0805D7B-263C-49D7-ABD6-D17EC7BCE368" id="_6FD6BC7D-520F-4730-BAAB-004F9C3374CB" name="RepetirExamenLicenciaDecision" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_F057B5B8-4D77-47B7-8C4E-08E994A032D7">
+  <dmn:extensionElements/>
+  <dmn:import id="_9450FEC4-C569-4A44-B779-3F156B087373" name="InfraccionesTraficoDecision" namespace="https://kiegroup.org/dmn/_F0805D7B-263C-49D7-ABD6-D17EC7BCE368" locationURI="InfraccionesTraficoDecision.dmn" importType="http://www.omg.org/spec/DMN/20180521/MODEL/"/>
+  <dmn:inputData id="_501B2EF4-5C4F-4FF4-A582-1E8AF55634A7" name="Numero veces licencia retirada">
+    <dmn:extensionElements/>
+    <dmn:variable id="_1C830B5E-464E-4A89-B095-3B7587554A1D" name="Numero veces licencia retirada" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_A33FD288-6EFE-4821-BD84-A623657CB854" name="Conductor">
+    <dmn:extensionElements/>
+    <dmn:variable id="_528E8CD1-2153-412E-B9F0-80AA9A3CDF92" name="Conductor" typeRef="InfraccionesTraficoDecision.tConductor"/>
+  </dmn:inputData>
+  <dmn:inputData id="_5DE633BF-5887-4D68-8E65-AFF678A60BFB" name="Infraccion">
+    <dmn:extensionElements/>
+    <dmn:variable id="_9FDFDD18-7B5F-4879-BE5A-58C2CCA6490F" name="Infraccion" typeRef="InfraccionesTraficoDecision.tInfraccion"/>
+  </dmn:inputData>
+  <dmn:decision id="_4B815E5F-9CE5-43DD-99CB-811194F29DCB" name="Requerir repeticion examen licencia">
+    <dmn:extensionElements/>
+    <dmn:variable id="_CC21A633-AEB1-4398-9DBE-E1E34E8555B9" name="Requerir repeticion examen licencia" typeRef="string"/>
+    <dmn:informationRequirement id="_F0A0F531-844A-4AA5-9E26-0CAB227B4C92">
+      <dmn:requiredInput href="#_5DE633BF-5887-4D68-8E65-AFF678A60BFB"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_CF1A7643-704B-4AEF-9B4F-7DAFFA14E903">
+      <dmn:requiredInput href="#_501B2EF4-5C4F-4FF4-A582-1E8AF55634A7"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_883FC737-94D7-47FA-97E3-76D697F39F12">
+      <dmn:requiredInput href="#_A33FD288-6EFE-4821-BD84-A623657CB854"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_E7751546-CAEF-4D6C-98AB-2F5E1FA86143">
+      <dmn:requiredKnowledge href="https://kiegroup.org/dmn/_F0805D7B-263C-49D7-ABD6-D17EC7BCE368#_3CDFB672-E016-436C-BCB1-F26AAB3F70C5"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_F3E111D7-4B63-450A-9E6A-98F8CC6A0673">
+      <dmn:contextEntry>
+        <dmn:variable id="_B7728933-E758-4B7D-B5A4-05AFD0054B93" name="Se retira licencia en falta actual" typeRef="string"/>
+        <dmn:literalExpression id="_97AA1016-5269-4869-997A-EE575C51FFBE">
+          <dmn:text>InfraccionesTraficoDecision.Licencia retirada DS(Conductor, Infraccion)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:decisionTable id="_59FCFAA6-6BD9-4973-8183-F02A4416389F" hitPolicy="ANY" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_D5C7D766-DC4E-44BF-8AE0-53B7BE2280B5">
+            <dmn:inputExpression id="_3E42FA37-E7A4-4259-8E47-1F0E8268BF1A" typeRef="number">
+              <dmn:text>Numero veces licencia retirada</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_774F61CB-4CF8-4309-B306-37F5E376E988">
+            <dmn:inputExpression id="_CEED6DDF-6F72-465F-B986-DC7938C094A9" typeRef="string">
+              <dmn:text>Se retira licencia en falta actual</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:output id="_85C54E6D-3E6E-44FA-8363-E0DB55BB3F03"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_7ADEB078-44C8-4E30-8703-F9836A340F0D">
+            <dmn:inputEntry id="_536230EF-B009-477C-9296-73575AB3B72E">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_2C7D083B-EF29-4007-84A8-F73F40A52E85">
+              <dmn:text>"NO"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_8533BC81-BC08-406A-BFBD-3E36B8A1ADE2">
+              <dmn:text>"NO"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_533E8A61-46A0-481A-9403-5E27348CCF1B">
+            <dmn:inputEntry id="_D1847A61-FE01-4049-8032-0B87EF0C4B86">
+              <dmn:text>0</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_84723812-611D-437A-929F-6118567B7268">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_4EBF38E9-3E20-4EE8-BD6B-F1EB85EB0639">
+              <dmn:text>"NO"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_A38BA3DD-7D4D-4786-8BC3-87C0E26DF425">
+            <dmn:inputEntry id="_7B6AAB3C-0109-4A14-BFCE-04CA5FC81C05">
+              <dmn:text>[1..2)</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B5711516-A49F-4D90-B372-A4F25CEF48D6">
+              <dmn:text>"SI"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_5962EAF7-69A6-4962-8E94-30B907329D91">
+              <dmn:text>"CONSULTAR"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_CD798015-A58B-4700-9F2C-3E9306A60C1F">
+            <dmn:inputEntry id="_EF742F13-743D-4DCD-BDAB-CC768881A0F4">
+              <dmn:text>&gt;2</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_A02CCCD4-C757-415B-8E42-289E6823FD29">
+              <dmn:text>"SI"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_56B5B4C0-8D0A-449C-8429-E22B06F61009">
+              <dmn:text>"SI"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_362D7EFB-AF0B-477B-AAA7-BE5ECE6CCB9E" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_F3E111D7-4B63-450A-9E6A-98F8CC6A0673">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1201</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_97AA1016-5269-4869-997A-EE575C51FFBE">
+            <kie:width>1201</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_59FCFAA6-6BD9-4973-8183-F02A4416389F">
+            <kie:width>50</kie:width>
+            <kie:width>263</kie:width>
+            <kie:width>477</kie:width>
+            <kie:width>259</kie:width>
+            <kie:width>132</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_3CDFB672-E016-436C-BCB1-F26AAB3F70C5" dmnElementRef="included1:_3CDFB672-E016-436C-BCB1-F26AAB3F70C5" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="991" y="148" width="351" height="227"/>
+        <dmndi:DMNLabel/>
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="991" y="248"/>
+          <di:waypoint x="1342" y="248"/>
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_501B2EF4-5C4F-4FF4-A582-1E8AF55634A7" dmnElementRef="_501B2EF4-5C4F-4FF4-A582-1E8AF55634A7" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="482" y="383" width="133" height="58"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_A33FD288-6EFE-4821-BD84-A623657CB854" dmnElementRef="_A33FD288-6EFE-4821-BD84-A623657CB854" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="675" y="383" width="120" height="57"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_5DE633BF-5887-4D68-8E65-AFF678A60BFB" dmnElementRef="_5DE633BF-5887-4D68-8E65-AFF678A60BFB" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="847" y="383" width="133" height="58"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_4B815E5F-9CE5-43DD-99CB-811194F29DCB" dmnElementRef="_4B815E5F-9CE5-43DD-99CB-811194F29DCB" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="613" y="135" width="208" height="86"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_F0A0F531-844A-4AA5-9E26-0CAB227B4C92-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_F0A0F531-844A-4AA5-9E26-0CAB227B4C92">
+        <di:waypoint x="913.5" y="383"/>
+        <di:waypoint x="717" y="221"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_CF1A7643-704B-4AEF-9B4F-7DAFFA14E903-AUTO-TARGET" dmnElementRef="_CF1A7643-704B-4AEF-9B4F-7DAFFA14E903">
+        <di:waypoint x="548.5" y="412"/>
+        <di:waypoint x="717" y="221"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_883FC737-94D7-47FA-97E3-76D697F39F12-AUTO-TARGET" dmnElementRef="_883FC737-94D7-47FA-97E3-76D697F39F12">
+        <di:waypoint x="735" y="411.5"/>
+        <di:waypoint x="717" y="221"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_E7751546-CAEF-4D6C-98AB-2F5E1FA86143-AUTO-TARGET" dmnElementRef="_E7751546-CAEF-4D6C-98AB-2F5E1FA86143">
+        <di:waypoint x="1166.5" y="261.5"/>
+        <di:waypoint x="821" y="178"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
